@@ -21,19 +21,19 @@ align-items: center;
 `;
 export const Info = styled.div `
 z-index: 2;
-padding: 20px ;
+padding: 10px ;
 width: 50%;
 
 h1{
-    font-size:60px;
+    font-size:6rem;
     color: #ffffff;
     font-weight: 700;
 }
 p{
-    font-size: 20px;
+    font-size: 18px;
     color: #ffffff;
     font-weight: 500;
-    margin-top: 30px;
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
