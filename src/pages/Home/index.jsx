@@ -1,27 +1,43 @@
 import api from '../../services/api';
 import Header from '../../components/Header';
-import { Background } from './styles';
+import { Background, Info, Poster, Container } from './styles';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
 
 function Home() {
+    const [movie, setMovie] = useState();
 
-    async function getMovies() {
-        const data = await api.get('/movie/popular');
-        console.log(data);
+    useEffect(() => {
+        async function getMovies() {
+            const { data: { results } } = await api.get('/movie/popular');
+            setMovie(results[5]);
 
-    }
-    getMovies();
+        }
+        getMovies();
+
+    }, []);
 
     // https://image.tmdb.org/t/p/original/p8777bPIlyFYcjqP2hU8htoz1RG.jpg
 
     return (
+        <>
+            {movie && (
+                <Background img={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}>
+                    <Container>
+                        <Info>
+                            <h1>{movie.title}</h1>
+                            <p>{movie.overview}</p>
+                        </Info>
+                        <Poster>
+                            <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} />
+                        </Poster>
 
+                    </Container>
 
-        <Background img="https://image.tmdb.org/t/p/original/qnTdOizsXBzYu3uIbfhHSfE29TE.jpg">
-            <h1>Zero800movies</h1>
-            <p>Bem-vindo ao zero800movies!</p>
-        </Background>
-
+                </Background>
+            )}
+        </>
     )
 }
 
